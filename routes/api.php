@@ -22,4 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('post', PostController::class);
+
+Route::get('comments/{post_id}',[CommentController::class,'listAll'])->name('listAll');
 Route::resource('comment', CommentController::class);

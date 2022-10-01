@@ -9,6 +9,15 @@ use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
+
+    public function listALl($post_id){
+        $comments=Comment::where('post_id',$post_id)->get();
+        return response()->json([
+            'success'   => true,
+            'message'   => 'Comment successfully listed.',
+            'data'      => $comments
+            ], 200);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +25,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
