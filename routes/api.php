@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\PostController;
 use App\Http\Controllers\api\CommentController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
 
-Route::resource('post', PostController::class);
+
+Route::resource('post', PostController::class)->middleware('auth:sanctum');
 
 Route::get('comments/{post_id}',[CommentController::class,'listAll'])->name('listAll');
 Route::resource('comment', CommentController::class);
